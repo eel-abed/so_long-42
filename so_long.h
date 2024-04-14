@@ -6,30 +6,39 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/04/14 15:20:23 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:50:32 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define SO_LONG_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-/* Incluez ici les bibliothèques nécessaires */
-#include "mlx.h"
-#include <stdlib.h>
-#include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <mlx/mlx.h>
 
-/* Définissez ici les prototypes de vos fonctions */
+# define MAP_WIDTH 20
+# define MAP_HEIGHT 15
 
-void game_init(void);
-void game_run(void);
-void game_end(void);
+typedef struct  s_game
+{
+    void        *mlx;
+    void        *win;
+    // Ajoute ici les variables nécessaires pour ton jeu
+}               t_game;
 
-void map_load(const char *filename);
-void map_unload(void);
-void map_draw(void);
+typedef struct  s_map
+{
+    char        **map;
+    // Ajoute ici les variables nécessaires pour représenter la carte
+}               t_map;
 
-void render_begin(void);
-void render_end(void);
+// Prototypes des fonctions
+int     read_map(const char *file, t_map *map);
+void    render_map(t_game *game, t_map *map);
+void    move_player(t_game *game, t_map *map, int direction);
+void    free_map(t_map *map);
 
-void utils_do_something(void);
-
-#endif /* SO_LONG_H */
+#endif
