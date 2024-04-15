@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/04/14 15:50:32 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:38:51 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct  s_game
 {
     void        *mlx;
     void        *win;
-    // Ajoute ici les variables nécessaires pour ton jeu
+    
 }               t_game;
 
 typedef struct  s_map
