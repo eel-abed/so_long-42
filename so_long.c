@@ -6,8 +6,8 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/04/14 15:43:40 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:20:26 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <mlx/mlx.h>
+# include "MLX42/include/MLX42/MLX42.h"
