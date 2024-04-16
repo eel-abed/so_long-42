@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"so_long.h": "c",
+		"mlx42_int.h": "c",
+		"stdlib.h": "c"
+	}
+}
