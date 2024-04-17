@@ -6,7 +6,7 @@
 #    By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 13:49:16 by eel-abed          #+#    #+#              #
-#    Updated: 2024/04/17 17:29:02 by eel-abed         ###   ########.fr        #
+#    Updated: 2024/04/17 18:24:50 by eel-abed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := so_long
 
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Werror -Iheaders/
+CFLAGS := -Wall -Wextra -Werror -Iheaders/ -g
 
 SOURCE := srcs/*.c
 GETNEXTLINE := get_next_line_42/*c
