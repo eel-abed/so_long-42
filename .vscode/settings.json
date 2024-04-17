@@ -1,7 +1,10 @@
 {
 	"files.associations": {
 		"so_long.h": "c",
-		"mlx42_int.h": "c",
-		"stdlib.h": "c"
+		"mlx42.h": "c",
+		"glfw3.h": "c",
+		"stdio.h": "c",
+		"lodepng.h": "c",
+		"glad.h": "c"
 	}
 }
