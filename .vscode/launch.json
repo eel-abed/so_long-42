@@ -2,11 +2,11 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "LLDB",
+			"name": "Debug with LLDB",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/so_long", // replace <your-program> with your actual program
-			"args": ["assets/map.ber"], // command line arguments for your program
+			"program": "${workspaceFolder}/so_long", // replace <your-program> with your executable
+			"args": ["assets/map.ber"], // command line arguments go here
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
