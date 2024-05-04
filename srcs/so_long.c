@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/01 14:44:40 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/04 19:58:04 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 // Create a new image
 static mlx_image_t* img;
+static mlx_image_t* obstacle;
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -65,6 +66,22 @@ int	main(void)
 	// Set every pixel to white
 	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
 	
+	// Create a obstacle
+	obstacle = mlx_new_image(mlx, 32, 32);
+	if (!obstacle)
+		ft_error();
+
+	// Set every pixel to blue
+	uint32_t blueColor = 0x0000FFFF;
+	for (uint32_t y = 0; y < obstacle->height; y++) {
+		for (uint32_t x = 0; x < obstacle->width; x++) {
+			mlx_put_pixel(obstacle, x, y, blueColor);
+		}
+	}
+
+	// Display an instance of the image
+	if (mlx_image_to_window(mlx, obstacle, 100, 0) < 0)
+		ft_error();
 	// Display an instance of the image
 	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
         ft_error();
