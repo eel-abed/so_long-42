@@ -6,15 +6,12 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/06 16:42:29 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:57:20 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "so_long.h"
-
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
 
 // Create a new image
 static mlx_image_t* img;
@@ -47,28 +44,70 @@ void ft_hook(void* param)
 
 	// Check if the new position collides with any of the obstacles
 	for (size_t i = 0; i < obstacle->count; i++) {
-        if (!(new_x + img->width < (unsigned int)obstacle->instances[i].x || new_x > (unsigned int)obstacle->instances[i].x + 32 ||
-              new_y + img->height < (unsigned int)obstacle->instances[i].y || new_y > (unsigned int)obstacle->instances[i].y + 32)) {
+        if (!(new_x + img->width < (unsigned int)obstacle->instances[i].x || new_x > (unsigned int)obstacle->instances[i].x + 64 ||
+              new_y + img->height < (unsigned int)obstacle->instances[i].y || new_y > (unsigned int)obstacle->instances[i].y + 64)) {
             // New position collides with an obstacle, do not move
             return;
         }
     }
 
 	// Check if it is within the window boundaries
-	if (new_x >= 0 && new_x <= WINDOW_WIDTH && new_y >= 0 && new_y <= WINDOW_HEIGHT) {
+	if (new_x >= 0 && new_x <= (unsigned int)mlx->width && new_y >= 0 && new_y <= (unsigned int)mlx->height) {
 		img->instances[0].x = new_x;
 		img->instances[0].y = new_y;
 	}
 }
 
-int	main(void)
+void get_window_dimensions(char *map_name, int *width, int *height)
 {
+	FILE *file = fopen(map_name, "r");
+	if (file == NULL)
+	{
+		printf("Could not open file %s\n", map_name);
+		return;
+	}
+
+	char ch;
+	int max_width = 0, current_width = 0, max_height = 0;
+
+	while ((ch = fgetc(file)) != EOF)
+	{
+		if (ch == '\n')
+		{
+			if (current_width > max_width)
+				max_width = current_width;
+			current_width = 0;
+			max_height++;
+		}
+		else
+		{
+			current_width++;
+		}
+	}
+
+	*width = max_width * 64;
+	*height = max_height * 64;
+
+	fclose(file);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc < 2)
+	{
+		printf("Usage: %s <map_name>\n", argv[0]);
+		return (EXIT_FAILURE);
+	}
+	char *map_name = argv[1];
+	int width, height;
+	get_window_dimensions(map_name, &width, &height);
+	
 	// Start mlx
-	mlx_t* mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Test", false);
+	mlx_t* mlx = mlx_init(width,height, "Test", false);
 	if (!mlx)
         ft_error();
 
-	img = mlx_new_image(mlx, 32, 32);
+	img = mlx_new_image(mlx, 64, 64);
 	if (!img)
 		ft_error();
 
@@ -76,7 +115,7 @@ int	main(void)
 	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
 	
 	// Create a obstacle
-	obstacle = mlx_new_image(mlx, 32, 32);
+	obstacle = mlx_new_image(mlx, 64, 64);
 	if (!obstacle)
 		ft_error();
 
