@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/06 16:57:20 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:05:25 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "so_long.h"
 
 // Create a new image
-static mlx_image_t* img;
+static mlx_image_t* player;
 static mlx_image_t* obstacle;
 
 // Exit the program as failure.
@@ -28,8 +28,8 @@ static void ft_error(void)
 void ft_hook(void* param)
 {
 	mlx_t* mlx = param;
-	unsigned int new_x = img->instances[0].x;
-	unsigned int new_y = img->instances[0].y;
+	unsigned int new_x = player->instances[0].x;
+	unsigned int new_y = player->instances[0].y;
 
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
@@ -44,8 +44,8 @@ void ft_hook(void* param)
 
 	// Check if the new position collides with any of the obstacles
 	for (size_t i = 0; i < obstacle->count; i++) {
-        if (!(new_x + img->width < (unsigned int)obstacle->instances[i].x || new_x > (unsigned int)obstacle->instances[i].x + 64 ||
-              new_y + img->height < (unsigned int)obstacle->instances[i].y || new_y > (unsigned int)obstacle->instances[i].y + 64)) {
+        if (!(new_x + player->width < (unsigned int)obstacle->instances[i].x || new_x > (unsigned int)obstacle->instances[i].x + 64 ||
+              new_y + player->height < (unsigned int)obstacle->instances[i].y || new_y > (unsigned int)obstacle->instances[i].y + 64)) {
             // New position collides with an obstacle, do not move
             return;
         }
@@ -53,8 +53,8 @@ void ft_hook(void* param)
 
 	// Check if it is within the window boundaries
 	if (new_x >= 0 && new_x <= (unsigned int)mlx->width && new_y >= 0 && new_y <= (unsigned int)mlx->height) {
-		img->instances[0].x = new_x;
-		img->instances[0].y = new_y;
+		player->instances[0].x = new_x;
+		player->instances[0].y = new_y;
 	}
 }
 
@@ -107,12 +107,12 @@ int	main(int argc, char **argv)
 	if (!mlx)
         ft_error();
 
-	img = mlx_new_image(mlx, 64, 64);
-	if (!img)
+	player = mlx_new_image(mlx, 64, 64);
+	if (!player)
 		ft_error();
 
 	// Set every pixel to white
-	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
+	memset(player->pixels, 255, player->width * player->height * sizeof(int32_t));
 	
 	// Create a obstacle
 	obstacle = mlx_new_image(mlx, 64, 64);
@@ -152,7 +152,7 @@ int	main(int argc, char **argv)
 		ft_error();
 
 	// Display an instance of the image
-	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
+	if (mlx_image_to_window(mlx, player, 0, 0) < 0)
 		ft_error();
 
 	mlx_loop_hook(mlx, ft_hook, mlx);
@@ -161,7 +161,7 @@ int	main(int argc, char **argv)
 	
 
 	// Optional, terminate will clean up any leftovers, this is just to demonstrate.
-	mlx_delete_image(mlx, img);
+	mlx_delete_image(mlx, player);
 	mlx_terminate(mlx);
 	free(mlx);
 	return (EXIT_SUCCESS);
