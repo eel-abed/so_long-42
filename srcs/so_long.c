@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/06 12:41:39 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:42:29 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void ft_hook(void* param)
 int	main(void)
 {
 	// Start mlx
-	mlx_t* mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Test", true);
+	mlx_t* mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Test", false);
 	if (!mlx)
         ft_error();
 
