@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/07 18:07:49 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/07 18:52:24 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void ft_hook(void* param)
 			return;
 		}
 	}
-
+	
 	// Check if it is within the window boundaries
 	if (new_x >= 0 && new_x <= (unsigned int)mlx->width && new_y >= 0 && new_y <= (unsigned int)mlx->height) {
 		player->instances[0].x = new_x;
@@ -150,18 +150,27 @@ int	main(int argc, char **argv)
 	mlx_t* mlx = mlx_init(width,height, "Test", false);
 	if (!mlx)
         ft_error();
+	// Create a player
 	player = mlx_new_image(mlx, 64, 64);
-	
+	if (!player)
+		ft_error();
+
+	// Set every pixel to white
+	memset(player->pixels, 255, player->width * player->height * sizeof(int32_t));
+
+	// Allocate space for the player instance
+	player->instances = malloc(sizeof(*player->instances));
+	if (!player->instances)
+		ft_error();
+	// Display an instance of the image
+	if (mlx_image_to_window(mlx, player, player->instances[0].x, player->instances[0].y) < 0)
+		ft_error();
     obstacle = mlx_new_image(mlx, 64, 64);
     if (!player || !obstacle)
         ft_error();
 	
     read_map(map_name, player, obstacle);
-	// Display an instance of the image
-	if (mlx_image_to_window(mlx, player, player->instances[0].x, player->instances[0].y) < 0)
-		ft_error();
-	// Set every pixel to white
-	memset(player->pixels, 255, player->width * player->height * sizeof(int32_t));
+
 	// Create a obstacle
 	obstacle = mlx_new_image(mlx, 64, 64);
 	if (!obstacle)
