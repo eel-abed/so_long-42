@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/12 14:48:23 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:20:54 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 // Create a new image
 static mlx_image_t* player;
 static mlx_image_t* obstacle;
+static mlx_image_t* collectible;
+static mlx_image_t* sortie;
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -91,7 +93,7 @@ void get_window_dimensions(char *map_name, int *width, int *height)
 	fclose(file);
 }
 
-void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle)
+void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_image_t *collectible, mlx_image_t *sortie	)
 {
 	FILE *file = fopen(map_name, "r");
 	if (file == NULL)
@@ -122,13 +124,28 @@ void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle)
 			}
 			else if (ch == 'P')
 			{
-				
 				// Set the player's starting position
 				player->instances = realloc(player->instances, sizeof(*player->instances));
 				player->instances[0].x = x * 64 + 5;
 				player->instances[0].y = y * 64 + 5;
 				player->count = 1;
 			}
+			else if (ch == 'C')
+			{
+				collectible->instances = realloc(collectible->instances, (collectible->count + 1) * sizeof(*collectible->instances));
+				collectible->instances[collectible->count].x = x * 64;
+				collectible->instances[collectible->count].y = y * 64;
+				collectible->count++;
+			}
+			else if (ch == 'E')
+			{
+				sortie->instances = realloc(sortie->instances, sizeof(*sortie->instances));
+				sortie->instances[0].x = x * 64;
+				sortie->instances[0].y = y * 64;
+				sortie->count = 1;
+				
+			}
+			
 
 			x++;
 		}
@@ -177,9 +194,48 @@ int	main(int argc, char **argv)
 
 	// Set every pixel to black
 	memset(obstacle->pixels, 222, obstacle->width * obstacle->height * sizeof(int32_t));
-	
-    read_map(map_name, player, obstacle);
 
+	// Create a collectible
+	collectible = mlx_new_image(mlx, 64, 64);
+	if (!collectible)
+		ft_error();
+	
+	// Allocate space for the collectible instances
+	collectible->instances = malloc(sizeof(*collectible->instances));
+
+
+	// Set every pixel to yellow
+	memset(collectible->pixels, 333, collectible->width * collectible->height * sizeof(int32_t));
+
+
+
+	// Create a sortie
+	sortie = mlx_new_image(mlx, 64, 64);
+	if (!sortie)
+		ft_error();
+
+	// Allocate space for the sortie instances
+	sortie->instances = malloc(sizeof(*sortie->instances));
+
+	// Set every pixel to green
+	memset(sortie->pixels, 444, sortie->width * sortie->height * sizeof(int32_t));
+
+
+	//Display sortie
+	if (mlx_image_to_window(mlx, sortie, sortie->instances[0].x, sortie->instances[0].y) < 0)
+		ft_error();
+
+    read_map(map_name, player, obstacle, collectible, sortie);
+
+	//Display collectible
+	int o = collectible->count;
+	int g = 0;
+	while(o != 0)
+	{
+		mlx_image_to_window(mlx, collectible, collectible->instances[g].x, collectible->instances[g].y);
+		o--;
+		g++;
+	}
 
 	int a = obstacle->count;
 	int f = 0;
