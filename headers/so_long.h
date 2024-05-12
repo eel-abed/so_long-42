@@ -6,20 +6,31 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/01 14:41:45 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:41:55 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "get_next_line.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <libc.h>
 # include <MLX42.h>
+
+
+// Create a new image
+static mlx_image_t* player;
+static mlx_image_t* obstacle;
+static mlx_image_t* collectible;
+static mlx_image_t* sortie;
+
+void ft_hook(void* param);
+void get_window_dimensions(char *map_name, int *width, int *height);
+void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_image_t *collectible, mlx_image_t *sortie);
+
 
 
 #endif

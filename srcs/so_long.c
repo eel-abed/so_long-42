@@ -6,18 +6,13 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/12 15:20:54 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:44:15 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "so_long.h"
 
-// Create a new image
-static mlx_image_t* player;
-static mlx_image_t* obstacle;
-static mlx_image_t* collectible;
-static mlx_image_t* sortie;
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -26,133 +21,6 @@ static void ft_error(void)
     exit(EXIT_FAILURE);
 }
 
-
-void ft_hook(void* param)
-{
-    mlx_t* mlx = param;
-    unsigned int new_x = player->instances[0].x;
-    unsigned int new_y = player->instances[0].y;
-
-    if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		new_y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		new_y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		new_x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		new_x += 5;
-		
-	// Check if the new position collides with any of the obstacles
-	for (size_t i = 0; i < obstacle->count; i++) {
-		if (!(new_x + player->width < (unsigned int)obstacle->instances[i].x || new_x > (unsigned int)obstacle->instances[i].x + 64 ||
-			  new_y + player->height < (unsigned int)obstacle->instances[i].y || new_y > (unsigned int)obstacle->instances[i].y + 64)) {
-			// New position collides with an obstacle, do not move
-			return;
-		}
-	}
-	
-	// Check if it is within the window boundaries
-	if (new_x >= 0 && new_x <= (unsigned int)mlx->width && new_y >= 0 && new_y <= (unsigned int)mlx->height) {
-		player->instances[0].x = new_x;
-		player->instances[0].y = new_y;
-	}	
-}
-
-void get_window_dimensions(char *map_name, int *width, int *height)
-{
-	FILE *file = fopen(map_name, "r");
-	if (file == NULL)
-	{
-		printf("Could not open file %s\n", map_name);
-		return;
-	}
-
-	char ch;
-	int max_width = 0, current_width = 0, max_height = 0;
-
-	while ((ch = fgetc(file)) != EOF)
-	{
-		if (ch == '\n')
-		{
-			if (current_width > max_width)
-				max_width = current_width;
-			current_width = 0;
-			max_height++;
-		}
-		else
-		{
-			current_width++;
-		}
-	}
-
-	*width = max_width * 64;
-	*height = max_height * 64;
-
-	fclose(file);
-}
-
-void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_image_t *collectible, mlx_image_t *sortie	)
-{
-	FILE *file = fopen(map_name, "r");
-	if (file == NULL)
-	{
-		printf("Could not open file %s\n", map_name);
-		return;
-	}
-
-	char ch;
-	int x = 0, y = 0;
-
-	while ((ch = fgetc(file)) != EOF)
-	{
-		if (ch == '\n')
-		{
-			x = 0;
-			y++;
-		}
-		else
-		{
-			if (ch == '1')
-			{
-				// Create an obstacle at (x, y)
-				obstacle->instances = realloc(obstacle->instances, (obstacle->count + 1) * sizeof(*obstacle->instances));
-				obstacle->instances[obstacle->count].x = x * 64;
-				obstacle->instances[obstacle->count].y = y * 64;
-				obstacle->count++;
-			}
-			else if (ch == 'P')
-			{
-				// Set the player's starting position
-				player->instances = realloc(player->instances, sizeof(*player->instances));
-				player->instances[0].x = x * 64 + 5;
-				player->instances[0].y = y * 64 + 5;
-				player->count = 1;
-			}
-			else if (ch == 'C')
-			{
-				collectible->instances = realloc(collectible->instances, (collectible->count + 1) * sizeof(*collectible->instances));
-				collectible->instances[collectible->count].x = x * 64;
-				collectible->instances[collectible->count].y = y * 64;
-				collectible->count++;
-			}
-			else if (ch == 'E')
-			{
-				sortie->instances = realloc(sortie->instances, sizeof(*sortie->instances));
-				sortie->instances[0].x = x * 64;
-				sortie->instances[0].y = y * 64;
-				sortie->count = 1;
-				
-			}
-			
-
-			x++;
-		}
-	}
-
-	fclose(file);
-}
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
