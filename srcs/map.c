@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/12 16:05:30 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:37:42 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_im
 				player->instances = realloc(player->instances, sizeof(*player->instances));
 				player->instances[0].x = x * 64 + 5;
 				player->instances[0].y = y * 64 + 5;
-				player->count = 1;
+				player->count++;
 			}
 			else if (ch == 'C')
 			{
@@ -96,8 +96,7 @@ void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_im
 				sortie->instances = realloc(sortie->instances, sizeof(*sortie->instances));
 				sortie->instances[0].x = x * 64;
 				sortie->instances[0].y = y * 64;
-				sortie->count = 1;
-				
+				sortie->count++;	
 			}
 			
 
@@ -106,4 +105,20 @@ void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_im
 	}
 
 	fclose(file);
+    // Check for map validity
+    if (player->count != 2)
+    {
+        printf("Error: Map must contain exactly one player start position.\n");
+        ft_error();
+    }
+    if (sortie->count != 2)
+    {
+        printf("Error: Map must contain exactly one exit.\n");
+        ft_error();
+    }
+    if (collectible->count < 1)
+    {
+        printf("Error: Map must contain at least one collectible.\n");
+        ft_error();
+    }
 }

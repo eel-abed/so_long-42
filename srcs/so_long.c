@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/12 17:07:40 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:38:30 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // Exit the program as failure.
 void ft_error(void)
 {
-    fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+    printf("ERROR\n");
     exit(EXIT_FAILURE);
 }
 
