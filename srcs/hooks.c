@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:40:33 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/12 17:06:00 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:28:54 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 #include "so_long.h"
 
 
+unsigned int total_movements = 0; // Global variable to keep track of total movements
 
 void ft_hook(void* param)
 {
-    mlx_t* mlx = param;
-    unsigned int new_x = player->instances[0].x;
-    unsigned int new_y = player->instances[0].y;
+	mlx_t* mlx = param;
+	unsigned int old_x = player->instances[0].x;
+	unsigned int old_y = player->instances[0].y;
+	unsigned int new_x = old_x;
+	unsigned int new_y = old_y;
 
-    if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_UP))
 		new_y -= 5;
@@ -45,5 +48,9 @@ void ft_hook(void* param)
 	if (new_x >= 0 && new_x <= (unsigned int)mlx->width && new_y >= 0 && new_y <= (unsigned int)mlx->height) {
 		player->instances[0].x = new_x;
 		player->instances[0].y = new_y;
+		if (new_x != old_x || new_y != old_y) {
+			total_movements++;
+			printf("Total movements: %u\n", total_movements); // Print total movements to the console
+		}
 	}	
 }
