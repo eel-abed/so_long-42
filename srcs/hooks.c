@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:40:33 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/15 15:28:54 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:19 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ void ft_hook(void* param)
 	mlx_t* mlx = param;
 	unsigned int old_x = player->instances[0].x;
 	unsigned int old_y = player->instances[0].y;
+	
 	unsigned int new_x = old_x;
 	unsigned int new_y = old_y;
 
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		new_y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
 		new_y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		new_x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		new_x += 5;
 		
 	// Check if the new position collides with any of the obstacles

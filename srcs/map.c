@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/15 15:37:42 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:43:02 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,21 @@ void get_window_dimensions(char *map_name, int *width, int *height)
 
 	char ch;
 	int max_width = 0, current_width = 0, max_height = 0;
+	int first_line_width = -1;
 
 	while ((ch = fgetc(file)) != EOF)
 	{
 		if (ch == '\n')
 		{
+			if (first_line_width == -1)
+				first_line_width = current_width;
+			else if (current_width != first_line_width)
+			{
+				printf("Error: Map must be rectangular.\n");
+				fclose(file);
+				ft_error();
+			}
+
 			if (current_width > max_width)
 				max_width = current_width;
 			current_width = 0;
