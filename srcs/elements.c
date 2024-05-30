@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:44:52 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/13 15:54:19 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:10:20 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void create_elements(mlx_t *mlx)
 void display_elements(mlx_t *mlx, mlx_image_t *obstacle, mlx_image_t *collectible)
 {
 	//Display collectible
+	int original_count = collectible->count;
 	int o = collectible->count;
 	int g = 0;
 	while(o != 0)
@@ -74,6 +75,8 @@ void display_elements(mlx_t *mlx, mlx_image_t *obstacle, mlx_image_t *collectibl
 		o--;
 		g++;
 	}
+	collectible->count = original_count; // Restore the original count
+
 
 	int a = obstacle->count;
 	int f = 0;

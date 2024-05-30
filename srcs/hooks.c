@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:40:33 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/28 19:11:01 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:09:34 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void ft_hook(void* param)
 		if (!(new_x + player->width < (unsigned int)collectible->instances[i].x || new_x > (unsigned int)collectible->instances[i].x + 64 ||
 			  new_y + player->height < (unsigned int)collectible->instances[i].y || new_y > (unsigned int)collectible->instances[i].y + 64)) {
 			// New position collides with a collectible, remove the collectible
-			collectible->instances[i].x = -1;
+			collectible->instances[i+5].x = -1;
 			collectible->instances[i].y = -1;
             collectibles_taken++; // Increment the number of collectibles taken
 
