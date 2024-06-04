@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/13 15:20:20 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:01:20 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 // Create a new image
 mlx_image_t* player;
+mlx_texture_t* player_texture;
 mlx_texture_t* texture;
 mlx_image_t* obstacle;
 mlx_texture_t* texture_collectible;
