@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/04 15:09:18 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/27 18:26:13 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,24 @@ void get_window_dimensions(char *map_name, int *width, int *height)
 	char ch;
 	int max_width = 0, current_width = 0, max_height = 0;
 	int first_line_width = -1;
-
+	int tmp_max_height = 0;
+	//get max_height temporary
 	while ((ch = fgetc(file)) != EOF)
 	{
+		if (ch == '\n')
+		{
+			tmp_max_height++;
+		}
+	}
+	rewind(file);
+	while ((ch = fgetc(file)) != EOF)
+	{
+		if ((current_width == 0 || current_width == max_width) && ch != '1' && ch != '\n')
+		{
+			printf("Error: Map must be surrounded by walls.\n");
+			fclose(file);
+			ft_error();
+		}
 		if (ch == '\n')
 		{
 			if (first_line_width == -1)
@@ -48,6 +63,25 @@ void get_window_dimensions(char *map_name, int *width, int *height)
 		else
 		{
 			current_width++;
+		}
+		if (first_line_width == -1 && ch != '1')
+		{
+			printf("Error: Map must be surrounded by walls.\n");
+			fclose(file);
+			ft_error();
+		}
+		if ((current_width == 0 || current_width == max_width) && ch != '1' && ch != '\n')
+		{
+			printf("Error: Map must be surrounded by walls.\n");
+			fclose(file);
+			ft_error();
+		}
+		//chekc the last row if it's 1
+		if (tmp_max_height -1 == max_height && ch != '1' && ch != '\n')
+		{
+			printf("Error: Map must be surrounded by walls.\n");
+			fclose(file);
+			ft_error();
 		}
 	}
 
@@ -132,3 +166,4 @@ void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_im
         ft_error();
     }
 }
+
