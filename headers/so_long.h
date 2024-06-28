@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/28 15:58:23 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:15:59 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ typedef	struct s_hook_param
 	mlx_t		*mlx;
 	GameAssets	*game_assets;
 }	t_hook_param;
+
+typedef struct s_point
+{
+	int x;
+	int y;
+} t_point;
+
+typedef struct s_fill_params
+{
+    char **tab;
+    t_point size;
+    char to_fill;
+    int *collectible_count;
+    int *exit_reachable;
+} t_fill_params;
 
 
 
