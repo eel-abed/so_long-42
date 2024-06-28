@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/27 20:43:09 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:02:59 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,12 @@ void get_window_dimensions(char *map_name, int *width, int *height)
     fclose(file);
 }
 
-void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_image_t *collectible, mlx_image_t *sortie)
+void read_map(char *map_name, GameAssets* game_assets)
 {
+    mlx_image_t *player = game_assets->player;
+    mlx_image_t *obstacle = game_assets->obstacle;
+    mlx_image_t *collectible = game_assets->collectible;
+    mlx_image_t *sortie = game_assets->sortie;
     FILE *file = fopen(map_name, "r");
     if (file == NULL)
     {
@@ -140,10 +144,10 @@ void read_map(char *map_name, mlx_image_t *player, mlx_image_t *obstacle, mlx_im
     int x = 0, y = 0;
     int player_start_x = -1, player_start_y = -1;
     int collectible_total = 0;
-	player->count = 0;
-	obstacle->count = 0;
-	collectible->count = 0;
-	sortie->count = 0;
+    game_assets->player->count = 0;
+    game_assets->obstacle->count = 0;
+    game_assets->collectible->count = 0;
+    game_assets->sortie->count = 0;
     char **map_data = NULL;
     int map_height = 0;
 

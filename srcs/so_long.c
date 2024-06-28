@@ -6,51 +6,49 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/05/15 15:38:30 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/28 15:59:42 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
 
-
-// Exit the program as failure.
-void ft_error(void)
+void	ft_error(void)
 {
-    printf("ERROR\n");
-    exit(EXIT_FAILURE);
+	printf("ERROR\n");
+	exit(EXIT_FAILURE);
 }
 
-
+static void	init_game_assets(mlx_t *mlx, GameAssets *game_assets
+	, char *map_name)
+{
+	game_assets->player = malloc(sizeof(mlx_image_t));
+	create_elements(mlx, game_assets);
+	read_map(map_name, game_assets);
+	display_elements(mlx, game_assets->obstacle, game_assets->collectible);
+}
 
 int	main(int argc, char **argv)
 {
+	t_hook_param	hook_param;
+	int				width;
+	int				height;
+	mlx_t			*mlx;
+	GameAssets		game_assets;
+
 	if (argc < 2)
 	{
 		printf("Usage: %s <map_name>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
-	char *map_name = argv[1];
-	int width, height;
-	get_window_dimensions(map_name, &width, &height);
-	
-	// Start mlx
-	mlx_t* mlx = mlx_init(width,height, "Test", false);
+	get_window_dimensions(argv[1], &width, &height);
+	mlx = mlx_init(width, height, "Test", false);
 	if (!mlx)
-        ft_error();
-
-	// Create a player
-	create_elements(mlx);
-	// Read the map
-	read_map(map_name, player, obstacle, collectible, sortie);
-	// Display the elements
-	display_elements(mlx,obstacle, collectible);
-	mlx_loop_hook(mlx,ft_hook, mlx);
+		ft_error();
+	init_game_assets(mlx, &game_assets, argv[1]);
+	hook_param.mlx = mlx;
+	hook_param.game_assets = &game_assets;
+	mlx_loop_hook(mlx, ft_hook, &hook_param);
 	mlx_loop(mlx);
-	
-
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
-
-
