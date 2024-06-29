@@ -6,90 +6,30 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 17:11:44 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/29 18:26:47 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
-
-
-
-
-//error function when map not surrounded by walls
-void ft_map_wall_error()
-{
-	printf("Error: Map must be surrounded by walls.\n");
-	ft_error();
-}
-
-void get_window_dimensions(char *map_name, int *width, int *height)
+void get_window_dimensions(char *map_name, int *width, int *height, Dimensions *dim)
 {
 	int fd;
-	char ch;
-	Dimensions dim = {0, 0, 0, -1, 0};
-
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Could not open file %s\n", map_name);
 		return;
 	}
-	//caluclate height
-	while (read(fd, &ch, 1) > 0)
-	{
-		if (ch == '\n')
-		{
-			dim.tmp_max_height++;
-		}
-	}
-	close(fd);
-	fd = open(map_name, O_RDONLY);
-	while (read(fd, &ch, 1) > 0)
-	{
-		if ((dim.current_width == 0 || dim.current_width == dim.max_width) && ch != '1' && ch != '\n')
-		{
-			close(fd);
-			ft_map_wall_error();
-		}
-		if (ch == '\n')
-		{
-			if (dim.first_line_width == -1)
-				dim.first_line_width = dim.current_width;
-			else if (dim.current_width != dim.first_line_width)
-			{
-				printf("Error: Map must be rectangular.\n");
-				close(fd);
-				ft_error();
-				return;
-			}
-			if (dim.current_width > dim.max_width)
-				dim.max_width = dim.current_width;
-			dim.current_width = 0;
-			dim.max_height++;
-		}
-		else
-		{
-			dim.current_width++;
-		}
-		if (dim.first_line_width == -1 && ch != '1')
-		{
-			close(fd);
-			ft_map_wall_error();
-		}
-		if (dim.max_height == dim.tmp_max_height - 1)
-		{
-			if (ch != '1' && ch != '\n')
-			{
-				close(fd);
-				ft_map_wall_error();
-			}
-		}
-	}
 
-	*width = dim.max_width * 64;
-	*height = dim.max_height * 64;
+	calculate_height(fd, dim);
+	close(fd);
+
+	fd = open(map_name, O_RDONLY);
+	calculate_width(fd, dim);
+
+	*width = dim->max_width * 64;
+	*height = dim->max_height * 64;
 
 	close(fd);
 }

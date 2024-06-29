@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/28 15:59:42 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/29 18:22:18 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	main(int argc, char **argv)
 		printf("Usage: %s <map_name>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
-	get_window_dimensions(argv[1], &width, &height);
+	Dimensions dim = {0, 0, 0, -1, 0};
+	get_window_dimensions(argv[1], &width, &height, &dim);
 	mlx = mlx_init(width, height, "Test", false);
 	if (!mlx)
 		ft_error();
