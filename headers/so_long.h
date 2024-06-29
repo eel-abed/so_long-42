@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/28 17:15:59 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/29 16:59:44 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <MLX42.h>
 
 
-typedef struct {
+typedef struct s_game_assets{
     mlx_image_t* player;
     mlx_texture_t* player_texture;
     mlx_texture_t* texture;
@@ -53,8 +53,16 @@ typedef struct s_fill_params
     int *exit_reachable;
 } t_fill_params;
 
+typedef struct s_dimensions{
+    int max_width;
+    int current_width;
+    int max_height;
+    int first_line_width;
+    int tmp_max_height;
+} Dimensions;
 
 
+int	flood_fill(char **tab, t_point size, t_point begin, int collectible_total);
 void ft_hook(void* param);
 void get_window_dimensions(char *map_name, int *width, int *height);
 void read_map(char *map_name, GameAssets *game_assets);

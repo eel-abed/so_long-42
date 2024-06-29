@@ -6,123 +6,92 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/28 17:15:55 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/29 17:11:44 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	fill(t_point cur, t_fill_params *params)
+
+
+
+
+
+//error function when map not surrounded by walls
+void ft_map_wall_error()
 {
-	if (cur.y < 0)
-		return ;
-	if (cur.y >= params->size.y)
-		return ;
-	if (cur.x < 0)
-		return ;
-	if (cur.x >= params->size.x)
-		return ;
-	if (params->tab[cur.y][cur.x] == '1')
-		return ;
-	if (params->tab[cur.y][cur.x] == 'F')
-		return ;
-	if (params->tab[cur.y][cur.x] == 'C')
-		(*params->collectible_count)++;
-	if (params->tab[cur.y][cur.x] == 'E')
-		*params->exit_reachable = 1;
-	params->tab[cur.y][cur.x] = 'F';
-	fill((t_point){cur.x - 1, cur.y}, params);
-	fill((t_point){cur.x + 1, cur.y}, params);
-	fill((t_point){cur.x, cur.y - 1}, params);
-	fill((t_point){cur.x, cur.y + 1}, params);
+	printf("Error: Map must be surrounded by walls.\n");
+	ft_error();
 }
 
-int	flood_fill(char **tab, t_point size, t_point begin, int collectible_total)
+void get_window_dimensions(char *map_name, int *width, int *height)
 {
-	int				collectible_count;
-	int				exit_reachable;
-	t_fill_params	params;
+	int fd;
+	char ch;
+	Dimensions dim = {0, 0, 0, -1, 0};
 
-	params.tab = tab;
-	params.size = size;
-	params.to_fill = tab[begin.y][begin.x];
-	params.collectible_count = &collectible_count;
-	params.exit_reachable = &exit_reachable;
-	collectible_count = 0;
-	exit_reachable = 0;
-	fill(begin, &params);
-	return (collectible_count == collectible_total && exit_reachable);
-}
-
-void	get_window_dimensions(char *map_name, int *width, int *height)
-{
-	FILE *file = fopen(map_name, "r");
-	if (file == NULL)
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
 	{
 		printf("Could not open file %s\n", map_name);
 		return;
 	}
-	char ch;
-	int max_width = 0, current_width = 0, max_height = 0;
-	int first_line_width = -1;
-	int tmp_max_height = 0;
-	while ((ch = fgetc(file)) != EOF)
+	//caluclate height
+	while (read(fd, &ch, 1) > 0)
 	{
 		if (ch == '\n')
 		{
-			tmp_max_height++;
+			dim.tmp_max_height++;
 		}
 	}
-	rewind(file);
-	while ((ch = fgetc(file)) != EOF)
+	close(fd);
+	fd = open(map_name, O_RDONLY);
+	while (read(fd, &ch, 1) > 0)
 	{
-		if ((current_width == 0 || current_width == max_width) && ch != '1' && ch != '\n')
+		if ((dim.current_width == 0 || dim.current_width == dim.max_width) && ch != '1' && ch != '\n')
 		{
-			printf("Error: Map must be surrounded by walls.\n");
-			fclose(file);
-			ft_error();
+			close(fd);
+			ft_map_wall_error();
 		}
 		if (ch == '\n')
 		{
-			if (first_line_width == -1)
-				first_line_width = current_width;
-			else if (current_width != first_line_width)
+			if (dim.first_line_width == -1)
+				dim.first_line_width = dim.current_width;
+			else if (dim.current_width != dim.first_line_width)
 			{
 				printf("Error: Map must be rectangular.\n");
-				fclose(file);
+				close(fd);
 				ft_error();
+				return;
 			}
-			if (current_width > max_width)
-				max_width = current_width;
-			current_width = 0;
-			max_height++;
+			if (dim.current_width > dim.max_width)
+				dim.max_width = dim.current_width;
+			dim.current_width = 0;
+			dim.max_height++;
 		}
 		else
 		{
-			current_width++;
+			dim.current_width++;
 		}
-		if (first_line_width == -1 && ch != '1')
+		if (dim.first_line_width == -1 && ch != '1')
 		{
-			printf("Error: Map must be surrounded by walls.\n");
-			fclose(file);
-			ft_error();
+			close(fd);
+			ft_map_wall_error();
 		}
-		if ((current_width == 0 || current_width == max_width) && ch != '1' && ch != '\n')
+		if (dim.max_height == dim.tmp_max_height - 1)
 		{
-			printf("Error: Map must be surrounded by walls.\n");
-			fclose(file);
-			ft_error();
-		}
-		if (tmp_max_height - 1 == max_height && ch != '1' && ch != '\n')
-		{
-			printf("Error: Map must be surrounded by walls.\n");
-			fclose(file);
-			ft_error();
+			if (ch != '1' && ch != '\n')
+			{
+				close(fd);
+				ft_map_wall_error();
+			}
 		}
 	}
-	*width = max_width * 64;
-	*height = max_height * 64;
-	fclose(file);
+
+	*width = dim.max_width * 64;
+	*height = dim.max_height * 64;
+
+	close(fd);
 }
 
 void read_map(char *map_name, GameAssets* game_assets)
