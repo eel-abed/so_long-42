@@ -6,31 +6,29 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 23:40:17 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:56:07 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void get_window_dimensions(char *map_name, int *width, int *height, Dimensions *dim)
+void	get_window_dimensions(char *map_name,
+	int *width, int *height, Dimensions *dim)
 {
-	int fd;
+	int	fd;
+
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Could not open file %s\n", map_name);
-		return;
+		return ;
 	}
-
 	calculate_height(fd, dim);
 	close(fd);
-
 	fd = open(map_name, O_RDONLY);
 	calculate_width(fd, dim);
-
 	*width = dim->max_width * 64;
 	*height = dim->max_height * 64;
-
 	close(fd);
 }
 
