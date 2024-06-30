@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 18:22:18 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/30 13:17:40 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	ft_error(void)
 }
 
 static void	init_game_assets(mlx_t *mlx, GameAssets *game_assets
-	, char *map_name)
+	, char *map_name, Dimensions *dim)
 {
 	game_assets->player = malloc(sizeof(mlx_image_t));
 	create_elements(mlx, game_assets);
-	read_map(map_name, game_assets);
+	read_map(map_name, game_assets, dim);
 	display_elements(mlx, game_assets->obstacle, game_assets->collectible);
 }
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 	mlx = mlx_init(width, height, "Test", false);
 	if (!mlx)
 		ft_error();
-	init_game_assets(mlx, &game_assets, argv[1]);
+	init_game_assets(mlx, &game_assets, argv[1], &dim);
 	hook_param.mlx = mlx;
 	hook_param.game_assets = &game_assets;
 	mlx_loop_hook(mlx, ft_hook, &hook_param);

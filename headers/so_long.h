@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 18:26:15 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/30 13:17:15 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	calculate_height(int fd, Dimensions *dim);
 int	flood_fill(char **tab, t_point size, t_point begin, int collectible_total);
 void ft_hook(void* param);
 void get_window_dimensions(char *map_name, int *width, int *height, Dimensions *dim);
-void read_map(char *map_name, GameAssets *game_assets);
+void read_map(char *map_name, GameAssets *game_assets, Dimensions *dim);
 void create_elements(mlx_t *mlx, GameAssets* game_assets);
 void display_elements(mlx_t *mlx,mlx_image_t *obstacle, mlx_image_t *collectible);
 void ft_error(void);

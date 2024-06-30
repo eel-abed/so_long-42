@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 23:56:07 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/30 13:16:38 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,15 @@ void	get_window_dimensions(char *map_name,
 	close(fd);
 }
 
-void read_map(char *map_name, GameAssets* game_assets)
+void read_map(char *map_name, GameAssets* game_assets, Dimensions *dim)
 {
 	mlx_image_t *player = game_assets->player;
 	mlx_image_t *obstacle = game_assets->obstacle;
 	mlx_image_t *collectible = game_assets->collectible;
 	mlx_image_t *sortie = game_assets->sortie;
-	FILE *file = fopen(map_name, "r");
-	if (file == NULL)
+	int	fd;
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
 	{
 		printf("Could not open file %s\n", map_name);
 		return;
@@ -53,22 +54,14 @@ void read_map(char *map_name, GameAssets* game_assets)
 	game_assets->collectible->count = 0;
 	game_assets->sortie->count = 0;
 	char **map_data = NULL;
-	int map_height = 0;
-	while ((ch = fgetc(file)) != EOF)
-	{
-		if (ch == '\n')
-		{
-			map_height++;
-		}
-	}
-	rewind(file);
+	int map_height = dim->max_height;
 	map_data = (char **)malloc(map_height * sizeof(char *));
 	for (int i = 0; i < map_height; i++)
 	{
 		map_data[i] = (char *)malloc(128 * sizeof(char));
 	}
 	int row = 0, col = 0;
-	while ((ch = fgetc(file)) != EOF)
+	while (read(fd, &ch, 1) > 0)
 	{
 		if (ch == '\n')
 		{
@@ -112,7 +105,7 @@ void read_map(char *map_name, GameAssets* game_assets)
 			x++;
 		}
 	}
-	fclose(file);
+	close(fd);
 	if (player->count != 1)
 	{
 		printf("Error: Map must contain exactly one player start position.\n");
