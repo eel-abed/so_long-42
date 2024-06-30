@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 18:26:47 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:40:17 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,12 @@ void read_map(char *map_name, GameAssets* game_assets)
 			map_data[row][col] = ch;
 			if (ch == '1')
 			{
-				obstacle->instances = realloc(obstacle->instances, (obstacle->count + 1) * sizeof(*obstacle->instances));
 				obstacle->instances[obstacle->count].x = x * 64;
 				obstacle->instances[obstacle->count].y = y * 64;
 				obstacle->count++;
 			}
 			else if (ch == 'P')
 			{
-				player->instances = realloc(player->instances, sizeof(*player->instances));
 				player->instances[0].x = x * 64 + 5;
 				player->instances[0].y = y * 64 + 5;
 				player->count++;
@@ -101,7 +99,6 @@ void read_map(char *map_name, GameAssets* game_assets)
 			}
 			else if (ch == 'C')
 			{
-				collectible->instances = realloc(collectible->instances, (collectible->count + 1) * sizeof(*collectible->instances));
 				collectible->instances[collectible->count].x = x * 64;
 				collectible->instances[collectible->count].y = y * 64;
 				collectible->count++;
@@ -109,7 +106,6 @@ void read_map(char *map_name, GameAssets* game_assets)
 			}
 			else if (ch == 'E')
 			{
-				sortie->instances = realloc(sortie->instances, sizeof(*sortie->instances));
 				sortie->instances[0].x = x * 64;
 				sortie->instances[0].y = y * 64;
 				sortie->count++;

@@ -6,7 +6,7 @@
 #    By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 13:49:16 by eel-abed          #+#    #+#              #
-#    Updated: 2024/06/28 15:53:04 by eel-abed         ###   ########.fr        #
+#    Updated: 2024/06/29 23:38:27 by eel-abed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := so_long
 
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Werror -Iheaders/ -g
+CFLAGS := -Wall -Wextra -fsanitize=address -Werror -Iheaders/ -g
 
 SOURCE := srcs/*.c
 LIBRARY := -LMLX42/build -lmlx42 -I/Users/$(USER)/.brew/opt/glfw/include -L/Users/$(USER)/.brew/opt/glfw/lib/ -lglfw -framework OpenGL -framework AppKit

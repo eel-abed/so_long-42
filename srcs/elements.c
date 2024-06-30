@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:44:52 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/28 15:00:54 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:40:01 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	create_elements(mlx_t *mlx, GameAssets* game_assets)
 	game_assets->obstacle = malloc(sizeof(mlx_image_t));
 	game_assets->texture = mlx_load_png("assets/mur.png");
 	game_assets->obstacle = mlx_texture_to_image(mlx, game_assets->texture);
-	game_assets->obstacle->instances = malloc(sizeof(*game_assets->obstacle->instances));
+	game_assets->obstacle->instances = malloc(50 * sizeof(*game_assets->obstacle->instances));
 
 	// Collectible
 	game_assets->collectible = malloc(sizeof(mlx_image_t));
 	game_assets->texture_collectible = mlx_load_png("assets/fish.png");
 	game_assets->collectible = mlx_texture_to_image(mlx, game_assets->texture_collectible);
-	game_assets->collectible->instances = malloc(sizeof(*game_assets->collectible->instances));
+	game_assets->collectible->instances = malloc(50 * sizeof(*game_assets->collectible->instances));
 
 	// Sortie
 	game_assets->sortie = malloc(sizeof(mlx_image_t));
