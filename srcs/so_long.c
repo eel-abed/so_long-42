@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 18:41:10 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:03:55 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	get_window_dimensions(char *map_name,
 static void	init_game_assets(mlx_t *mlx, GameAssets *game_assets
 	, char *map_name, Dimensions *dim)
 {
+	game_assets->total_movements = 0;
+	game_assets->collectibles_taken = 0;
 	game_assets->player = malloc(sizeof(mlx_image_t));
 	create_elements(mlx, game_assets);
 	read_map(map_name, game_assets, dim);

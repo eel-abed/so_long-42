@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 18:17:24 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:04:59 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,14 @@ typedef struct s_game_assets{
     mlx_image_t* collectible;
     mlx_texture_t* texture_sortie;
     mlx_image_t* sortie;
+	unsigned int total_movements;
+	unsigned int collectibles_taken;
 } GameAssets;
+
+typedef struct HookParam {
+    mlx_t* mlx;
+    GameAssets* game_assets;
+} HookParam;
 
 typedef	struct s_hook_param
 {
