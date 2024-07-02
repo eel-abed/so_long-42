@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:43:29 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 17:35:53 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:17:05 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,25 @@ void	perform_flood_fill(char **map_data, Dimensions *dim,
 	if (!flood_fill(map_data, size, start, game_assets->collectible->count))
 	{
 		printf("Player cannot reach the exit or collect all collectibles.\n");
+		ft_error();
+	}
+}
+
+void	check_map_validity(GameAssets *game_assets)
+{
+	if (game_assets->player->count != 1)
+	{
+		printf("Error: Map must contain exactly one player start position.\n");
+		ft_error();
+	}
+	if (game_assets->sortie->count != 1)
+	{
+		printf("Error: Map must contain exactly one exit.\n");
+		ft_error();
+	}
+	if (game_assets->collectible->count < 1)
+	{
+		printf("Error: Map must contain at least one collectible.\n");
 		ft_error();
 	}
 }

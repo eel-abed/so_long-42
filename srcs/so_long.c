@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/30 13:17:40 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:41:10 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@ void	ft_error(void)
 {
 	printf("ERROR\n");
 	exit(EXIT_FAILURE);
+}
+
+void	get_window_dimensions(char *map_name,
+	int *width, int *height, Dimensions *dim)
+{
+	int	fd;
+
+	fd = openFile(map_name);
+	calculate_height(fd, dim);
+	close(fd);
+	fd = open(map_name, O_RDONLY);
+	calculate_width(fd, dim);
+	*width = dim->max_width * 64;
+	*height = dim->max_height * 64;
+	close(fd);
 }
 
 static void	init_game_assets(mlx_t *mlx, GameAssets *game_assets
