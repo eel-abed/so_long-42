@@ -6,11 +6,12 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:43:29 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 15:44:34 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:35:53 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 
 void	fill(t_point cur, t_fill_params *params)
 {
@@ -52,4 +53,20 @@ int	flood_fill(char **tab, t_point size, t_point begin, int collectible_total)
 	exit_reachable = 0;
 	fill(begin, &params);
 	return (collectible_count == collectible_total && exit_reachable);
+}
+void	perform_flood_fill(char **map_data, Dimensions *dim,
+	GameAssets *game_assets)
+{
+	t_point	size;
+	t_point	start;
+
+	size.x = 128;
+	size.y = dim->max_height;
+	start.x = game_assets->player->instances[0].x / 64;
+	start.y = game_assets->player->instances[0].y / 64;
+	if (!flood_fill(map_data, size, start, game_assets->collectible->count))
+	{
+		printf("Player cannot reach the exit or collect all collectibles.\n");
+		ft_error();
+	}
 }

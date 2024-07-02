@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 15:33:39 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:38:09 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,76 +32,44 @@ void	get_window_dimensions(char *map_name,
 	close(fd);
 }
 
-void	read_map(char *map_name, GameAssets *game_assets, Dimensions *dim)
+void	process_char_instances(char ch, int x, int y, GameAssets *game_assets)
 {
-	int			fd;
-	fd = open(map_name, O_RDONLY);
-	if (fd == -1)
+	if (ch == '1')
 	{
-		printf("Could not open file %s\n", map_name);
-		return ;
+		game_assets->obstacle->instances[game_assets->obstacle->count].x
+			= x * 64;
+		game_assets->obstacle->instances[game_assets->obstacle->count].y
+			= y * 64;
+		game_assets->obstacle->count++;
 	}
-	char ch;
-	int x = 0, y = 0;
-	int player_start_x = -1, player_start_y = -1;
-	int collectible_total = 0;
-	game_assets->player->count = 0;
-	game_assets->obstacle->count = 0;
-	game_assets->collectible->count = 0;
-	game_assets->sortie->count = 0;
-	char **map_data = NULL;
-	int map_height = dim->max_height;
-	map_data = (char **)malloc(map_height * sizeof(char *));
-	for (int i = 0; i < map_height; i++)
+	else if (ch == 'C')
 	{
-		map_data[i] = (char *)malloc(128 * sizeof(char));
+		game_assets->collectible->instances[game_assets->collectible->count].x
+			= x * 64;
+		game_assets->collectible->instances[game_assets->collectible->count].y
+			= y * 64;
+		game_assets->collectible->count++;
 	}
-	int row = 0, col = 0;
-	while (read(fd, &ch, 1) > 0)
+}
+
+void	process_char_no_inst(char ch, int x, int y, GameAssets *game_assets)
+{
+	if (ch == 'P')
 	{
-		if (ch == '\n')
-		{
-			map_data[row][col] = '\0';
-			row++;
-			col = 0;
-			y++;
-			x = 0;
-		}
-		else
-		{
-			map_data[row][col] = ch;
-			if (ch == '1')
-			{
-				game_assets->obstacle->instances[game_assets->obstacle->count].x = x * 64;
-				game_assets->obstacle->instances[game_assets->obstacle->count].y = y * 64;
-				game_assets->obstacle->count++;
-			}
-			else if (ch == 'P')
-			{
-				game_assets->player->instances[0].x = x * 64;
-				game_assets->player->instances[0].y = y * 64;
-				game_assets->player->count++;
-				player_start_x = x;
-				player_start_y = y;
-			}
-			else if (ch == 'C')
-			{
-				game_assets->collectible->instances[game_assets->collectible->count].x = x * 64;
-				game_assets->collectible->instances[game_assets->collectible->count].y = y * 64;
-				game_assets->collectible->count++;
-				collectible_total++;
-			}
-			else if (ch == 'E')
-			{
-				game_assets->sortie->instances[0].x = x * 64;
-				game_assets->sortie->instances[0].y = y * 64;
-				game_assets->sortie->count++;
-			}
-			col++;
-			x++;
-		}
+		game_assets->player->instances[0].x = x * 64;
+		game_assets->player->instances[0].y = y * 64;
+		game_assets->player->count++;
 	}
-	close(fd);
+	else if (ch == 'E')
+	{
+		game_assets->sortie->instances[0].x = x * 64;
+		game_assets->sortie->instances[0].y = y * 64;
+		game_assets->sortie->count++;
+	}
+}
+
+void	check_map_validity(GameAssets *game_assets)
+{
 	if (game_assets->player->count != 1)
 	{
 		printf("Error: Map must contain exactly one player start position.\n");
@@ -117,16 +85,28 @@ void	read_map(char *map_name, GameAssets *game_assets, Dimensions *dim)
 		printf("Error: Map must contain at least one collectible.\n");
 		ft_error();
 	}
-	t_point size = {128, map_height};
-	t_point start = {player_start_x, player_start_y};
-	if (!flood_fill(map_data, size, start, collectible_total))
-	{
-		printf("Error: Player cannot reach the exit or collect all collectibles.\n");
-		ft_error();
+}
+
+void	read_map(char *map_name, GameAssets *game_assets, Dimensions *dim)
+{
+	int fd = open(map_name, O_RDONLY);
+	if (fd == -1) { printf("Could not open file %s\n", map_name); return; }
+	char ch, **map_data = malloc(dim->max_height * sizeof(char *));
+	for (int i = 0; i < dim->max_height; i++) map_data[i] = malloc(128 * sizeof(char));
+	int x = 0, y = 0, row = 0, col = 0;
+	game_assets->player->count = game_assets->obstacle->count = game_assets->collectible->count = game_assets->sortie->count = 0;
+	while (read(fd, &ch, 1) > 0) {
+		if (ch == '\n') { map_data[row][col] = '\0'; row++; col = 0; y++; x = 0; }
+		else {
+			map_data[row][col++] = ch;
+			process_char_instances(ch, x, y, game_assets);
+			process_char_no_inst(ch, x, y, game_assets);
+			x++;
+		}
 	}
-	for (int i = 0; i < map_height; i++)
-	{
-		free(map_data[i]);
-	}
+	close(fd);
+	check_map_validity(game_assets);
+	perform_flood_fill(map_data, dim, game_assets);
+	for (int i = 0; i < dim->max_height; i++) free(map_data[i]);
 	free(map_data);
 }
