@@ -6,14 +6,17 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:40:33 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 19:13:24 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:12:52 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void handle_keys(HookParam *hook_param, unsigned int *new_x, unsigned int *new_y) {
-	mlx_t *mlx = hook_param->mlx;
+void	handle_keys(HookParam *hook_param, unsigned int *new_x,
+	unsigned int *new_y) {
+	mlx_t	*mlx;
+
+	mlx = hook_param->mlx;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
@@ -26,17 +29,32 @@ void handle_keys(HookParam *hook_param, unsigned int *new_x, unsigned int *new_y
 		*new_x += 5;
 }
 
-bool check_obstacle_collision(GameAssets *game_assets, unsigned int new_x, unsigned int new_y) {
-	for (size_t i = 0; i < game_assets->obstacle->count; i++) {
-		if (!(new_x + game_assets->player->width < (unsigned int)game_assets->obstacle->instances[i].x || new_x > (unsigned int)game_assets->obstacle->instances[i].x + 64 ||
-			  new_y + game_assets->player->height < (unsigned int)game_assets->obstacle->instances[i].y || new_y > (unsigned int)game_assets->obstacle->instances[i].y + 64)) {
-			return true;
+bool	check_obstacle_collision(GameAssets *game_assets,
+	unsigned int new_x, unsigned int new_y)
+{
+	size_t			i;
+	unsigned int	instance_x;
+	unsigned int	instance_y;
+
+	instance_x = (unsigned int)game_assets->obstacle->instances[i].x;
+	instance_y = (unsigned int)game_assets->obstacle->instances[i].y;
+	i = 0;
+	while (i < game_assets->obstacle->count)
+	{
+		if (!(new_x + game_assets->player->width < instance_x
+				|| new_x > instance_x + 64
+				|| new_y + game_assets->player->height < instance_y
+				|| new_y > instance_y + 64))
+		{
+			return (true);
 		}
+		i++;
 	}
-	return false;
+	return (false);
 }
 
-void check_collectible_collision(GameAssets *game_assets, unsigned int new_x, unsigned int new_y) {
+void	check_collectible_collision(GameAssets *game_assets,
+	unsigned int new_x, unsigned int new_y) {
 	for (size_t i = 0; i < game_assets->collectible->count; i++) {
 		if (!(new_x + game_assets->player->width < (unsigned int)game_assets->collectible->instances[i].x || new_x > (unsigned int)game_assets->collectible->instances[i].x + 64 ||
 			  new_y + game_assets->player->height < (unsigned int)game_assets->collectible->instances[i].y || new_y > (unsigned int)game_assets->collectible->instances[i].y + 64)) {
