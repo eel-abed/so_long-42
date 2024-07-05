@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 19:04:59 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:41:55 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ void read_map(char *map_name, GameAssets *game_assets, Dimensions *dim);
 void create_elements(mlx_t *mlx, GameAssets* game_assets);
 void display_elements(mlx_t *mlx,mlx_image_t *obstacle, mlx_image_t *collectible);
 void ft_error(void);
-
-
-
-
-
+void	handle_collectible(unsigned int new_x, unsigned int new_y, GameAssets *game_assets);
+void	handle_exit(unsigned int new_x, unsigned int new_y, GameAssets *game_assets, mlx_t *mlx);
+void	handle_movement(mlx_t *mlx, unsigned int *new_x, unsigned int *new_y);
 #endif
