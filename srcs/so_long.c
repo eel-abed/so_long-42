@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 19:03:55 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:22:57 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	get_window_dimensions(char *map_name,
 {
 	int	fd;
 
-	fd = openFile(map_name);
+	fd = openfile(map_name);
 	calculate_height(fd, dim);
 	close(fd);
 	fd = open(map_name, O_RDONLY);

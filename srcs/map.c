@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 18:41:04 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:22:29 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	read_map(char *map_name, GameAssets *game_assets, Dimensions *dim)
 	game_assets->obstacle->count = 0;
 	game_assets->collectible->count = 0;
 	game_assets->sortie->count = 0;
-	fd = openFile(map_name);
+	fd = openfile(map_name);
 	ini_map(map_data, game_assets, fd);
 	close(fd);
 	check_map_validity(game_assets);

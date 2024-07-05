@@ -6,15 +6,15 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:42:11 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 17:51:49 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:21:54 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int openFile(char *map_name)
+int	openfile(char *map_name)
 {
-	int fd;
+	int	fd;
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
