@@ -6,14 +6,14 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:40:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/05 14:43:26 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:54:14 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 void	handle_collectible(unsigned int new_x, unsigned int new_y,
-				GameAssets *game_assets)
+				t_game_assets *game_assets)
 {
 	size_t	i;
 
@@ -40,7 +40,7 @@ void	handle_collectible(unsigned int new_x, unsigned int new_y,
 }
 
 void	handle_exit(unsigned int new_x, unsigned int new_y,
-				GameAssets *game_assets, mlx_t *mlx)
+				t_game_assets *game_assets, mlx_t *mlx)
 {
 	if (!(new_x + game_assets->player->width
 			< (unsigned int)game_assets->sortie->instances[0].x

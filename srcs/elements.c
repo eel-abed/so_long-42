@@ -6,13 +6,13 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:44:52 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:16:13 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:54:08 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	create_elements(mlx_t *mlx, GameAssets *game_assets)
+void	create_elements(mlx_t *mlx, t_game_assets *game_assets)
 {
 	create_player(mlx, game_assets);
 	create_obstacle(mlx, game_assets);
@@ -20,7 +20,7 @@ void	create_elements(mlx_t *mlx, GameAssets *game_assets)
 	create_sortie(mlx, game_assets);
 }
 
-void	create_player(mlx_t *mlx, GameAssets *game_assets)
+void	create_player(mlx_t *mlx, t_game_assets *game_assets)
 {
 	game_assets->player_texture = mlx_load_png("assets/player.png");
 	game_assets->player = mlx_texture_to_image(mlx,
@@ -33,7 +33,7 @@ void	create_player(mlx_t *mlx, GameAssets *game_assets)
 		ft_error();
 }
 
-void	create_obstacle(mlx_t *mlx, GameAssets *game_assets)
+void	create_obstacle(mlx_t *mlx, t_game_assets *game_assets)
 {
 	game_assets->texture = mlx_load_png("assets/mur.png");
 	game_assets->obstacle = mlx_texture_to_image(mlx, game_assets->texture);
@@ -41,7 +41,7 @@ void	create_obstacle(mlx_t *mlx, GameAssets *game_assets)
 			* sizeof(*game_assets->obstacle->instances));
 }
 
-void	create_collectible(mlx_t *mlx, GameAssets *game_assets)
+void	create_collectible(mlx_t *mlx, t_game_assets *game_assets)
 {
 	game_assets->texture_collectible = mlx_load_png("assets/fish.png");
 	game_assets->collectible = mlx_texture_to_image(mlx,
@@ -50,7 +50,7 @@ void	create_collectible(mlx_t *mlx, GameAssets *game_assets)
 			* sizeof(*game_assets->collectible->instances));
 }
 
-void	create_sortie(mlx_t *mlx, GameAssets *game_assets)
+void	create_sortie(mlx_t *mlx, t_game_assets *game_assets)
 {
 	game_assets->texture_sortie = mlx_load_png("assets/sortie.png");
 	game_assets->sortie = mlx_texture_to_image(mlx,

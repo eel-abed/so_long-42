@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:31:09 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:11:22 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:54:12 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_map_data(char **map_data, int max_height)
 	free(map_data);
 }
 
-void	free_elements(mlx_t *mlx, GameAssets *game_assets)
+void	free_elements(mlx_t *mlx, t_game_assets *game_assets)
 {
 	mlx_delete_image(mlx, game_assets->player);
 	mlx_delete_image(mlx, game_assets->obstacle);

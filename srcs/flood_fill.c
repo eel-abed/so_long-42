@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:43:29 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/05 19:06:30 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:54:09 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	flood_fill(char **tab, t_point size, t_point begin, int collectible_total)
 	return (collectible_count == collectible_total && exit_reachable);
 }
 
-void	perform_flood_fill(char **map_data, Dimensions *dim,
-	GameAssets *game_assets)
+void	perform_flood_fill(char **map_data, t_dimensions *dim,
+	t_game_assets *game_assets)
 {
 	t_point	size;
 	t_point	start;
@@ -71,7 +71,7 @@ void	perform_flood_fill(char **map_data, Dimensions *dim,
 	}
 }
 
-void	check_map_validity(GameAssets *game_assets)
+void	check_map_validity(t_game_assets *game_assets)
 {
 	if (game_assets->player->count != 1)
 	{

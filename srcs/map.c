@@ -6,13 +6,14 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 12:56:46 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:56:31 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	process_char_instances(char ch, int x, int y, GameAssets *game_assets)
+void	process_char_instances(char ch, int x, int y,
+	t_game_assets *game_assets)
 {
 	if (ch == '1')
 	{
@@ -32,7 +33,7 @@ void	process_char_instances(char ch, int x, int y, GameAssets *game_assets)
 	}
 }
 
-void	process_char_no_inst(char ch, int x, int y, GameAssets *game_assets)
+void	process_char_no_inst(char ch, int x, int y, t_game_assets *game_assets)
 {
 	if (ch == 'P')
 	{
@@ -56,7 +57,7 @@ void	initialize(int *row, int *col, int *x, int *y)
 	*y = 0;
 }
 
-void	ini_map( char **map_data, GameAssets *game_assets, int fd)
+void	ini_map( char **map_data, t_game_assets *game_assets, int fd)
 {
 	char	ch;
 	int		x;
@@ -85,7 +86,7 @@ void	ini_map( char **map_data, GameAssets *game_assets, int fd)
 	}
 }
 
-void	read_map(char *map_name, GameAssets *game_assets, Dimensions *dim)
+void	read_map(char *map_name, t_game_assets *game_assets, t_dimensions *dim)
 {
 	int		fd ;
 	char	**map_data;

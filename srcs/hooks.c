@@ -6,14 +6,14 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:40:33 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/05 14:43:00 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:56:01 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static int	check_collision(unsigned int new_x, unsigned int new_y,
-				GameAssets *game_assets)
+				t_game_assets *game_assets)
 {
 	size_t	i;
 
@@ -34,7 +34,7 @@ static int	check_collision(unsigned int new_x, unsigned int new_y,
 	return (0);
 }
 
-static void	update_position(GameAssets *game_assets, mlx_t *mlx,
+static void	update_position(t_game_assets *game_assets, mlx_t *mlx,
 				unsigned int new_x, unsigned int new_y)
 {
 	unsigned int	old_x;
@@ -57,13 +57,13 @@ static void	update_position(GameAssets *game_assets, mlx_t *mlx,
 
 void	ft_hook(void *param)
 {
-	HookParam		*hook_param;
-	mlx_t			*mlx;
-	GameAssets		*game_assets;
-	unsigned int	new_x;
-	unsigned int	new_y;
+	t_hook_param		*hook_param;
+	mlx_t				*mlx;
+	t_game_assets		*game_assets;
+	unsigned int		new_x;
+	unsigned int		ew_y;
 
-	hook_param = (HookParam *)param;
+	hook_param = (t_hook_param *)param;
 	mlx = hook_param->mlx;
 	game_assets = hook_param->game_assets;
 	new_x = game_assets->player->instances[0].x;

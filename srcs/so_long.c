@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:32:22 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:05:51 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error(void)
 }
 
 void	get_window_dimensions(char *map_name,
-	int *width, int *height, Dimensions *dim)
+	int *width, int *height, t_dimensions *dim)
 {
 	int	fd;
 
@@ -39,8 +39,8 @@ void	get_window_dimensions(char *map_name,
 	close(fd);
 }
 
-static void	init_game_assets(mlx_t *mlx, GameAssets *game_assets
-	, char *map_name, Dimensions *dim)
+static void	init_game_assets(mlx_t *mlx, t_game_assets *game_assets
+	, char *map_name, t_dimensions *dim)
 {
 	game_assets->total_movements = 0;
 	game_assets->collectibles_taken = 0;
@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 {
 	t_game_context	game;
 
-	game.dim = (Dimensions){0, 0, 0, -1, 0};
+	game.dim = (t_dimensions){0, 0, 0, -1, 0};
 	if (argc < 2)
 	{
 		printf("Usage: %s <map_name>\n", argv[0]);

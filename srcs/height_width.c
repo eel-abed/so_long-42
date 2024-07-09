@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:13:16 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/06/29 18:25:43 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:53:42 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_map_wall_error(void)
 	ft_error();
 }
 
-void	calculate_height(int fd, Dimensions *dim)
+void	calculate_height(int fd, t_dimensions *dim)
 {
 	char	ch;
 
@@ -31,7 +31,7 @@ void	calculate_height(int fd, Dimensions *dim)
 	}
 }
 
-void	handle_first_line(int fd, Dimensions *dim)
+void	handle_first_line(int fd, t_dimensions *dim)
 {
 	if (dim->first_line_width == -1)
 		dim->first_line_width = dim->current_width;
@@ -48,7 +48,7 @@ void	handle_first_line(int fd, Dimensions *dim)
 	dim->max_height++;
 }
 
-void	handle_other_lines(int fd, Dimensions *dim, char ch)
+void	handle_other_lines(int fd, t_dimensions *dim, char ch)
 {
 	if (dim->first_line_width == -1 && ch != '1')
 	{
@@ -65,7 +65,7 @@ void	handle_other_lines(int fd, Dimensions *dim, char ch)
 	}
 }
 
-void	calculate_width(int fd, Dimensions *dim)
+void	calculate_width(int fd, t_dimensions *dim)
 {
 	char	ch;
 

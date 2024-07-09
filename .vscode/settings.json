@@ -22,6 +22,7 @@
 		"stdio.h": "c",
 		"unistd.h": "c",
 		"algorithm": "c",
-		"chrono": "c"
+		"chrono": "c",
+		"locale": "c"
 	}
 }
