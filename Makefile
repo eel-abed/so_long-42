@@ -6,7 +6,7 @@
 #    By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/14 13:49:16 by eel-abed          #+#    #+#              #
-#    Updated: 2024/07/09 15:27:26 by eel-abed         ###   ########.fr        #
+#    Updated: 2024/07/09 15:30:05 by eel-abed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ MLX42_LIB = $(MLX42_BUILD_DIR)/libmlx42.a
 USER = $(shell whoami)
 
 HEADERS_MLX42 = $(MLX42_DIR)/include/MLX42
-HEADERS_GLFW = /Users/$(USER)/.brew/opt/glfw/lib
+HEADERS_GLFW = /Users/$(USER)/homebrew/opt/glfw/lib
 
 all: $(LIBFT_LIB) mlx42 $(NAME)
 
