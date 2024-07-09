@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/05 18:22:29 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:00:42 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ void	read_map(char *map_name, GameAssets *game_assets, Dimensions *dim)
 	close(fd);
 	check_map_validity(game_assets);
 	perform_flood_fill(map_data, dim, game_assets);
-	free(map_data);
+	free_map_data(map_data);
 }

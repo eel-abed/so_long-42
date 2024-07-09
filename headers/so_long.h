@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/08 21:19:04 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/08 22:31:50 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	create_player(mlx_t *mlx, GameAssets *game_assets);
 void	create_obstacle(mlx_t *mlx, GameAssets *game_assets);
 void	create_collectible(mlx_t *mlx, GameAssets *game_assets);
 void	create_sortie(mlx_t *mlx, GameAssets *game_assets);
+void free_map_data(char **map_data);
 
 
 #endif
