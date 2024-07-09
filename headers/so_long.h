@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/08 22:31:50 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:41:02 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <libc.h>
-# include <MLX42.h>
+# include <../MLX42/include/MLX42/MLX42.h>
 
 
 typedef struct s_game_assets{
@@ -96,7 +96,8 @@ void	create_player(mlx_t *mlx, GameAssets *game_assets);
 void	create_obstacle(mlx_t *mlx, GameAssets *game_assets);
 void	create_collectible(mlx_t *mlx, GameAssets *game_assets);
 void	create_sortie(mlx_t *mlx, GameAssets *game_assets);
-void free_map_data(char **map_data);
+void free_map_data(char **map_data, int max_height);
+void free_elements(mlx_t *mlx, GameAssets *game_assets);
 
 
 #endif

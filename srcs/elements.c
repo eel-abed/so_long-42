@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:44:52 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/08 21:14:59 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:16:13 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	create_player(mlx_t *mlx, GameAssets *game_assets)
 
 void	create_obstacle(mlx_t *mlx, GameAssets *game_assets)
 {
-	game_assets->obstacle = malloc(sizeof(mlx_image_t));
 	game_assets->texture = mlx_load_png("assets/mur.png");
 	game_assets->obstacle = mlx_texture_to_image(mlx, game_assets->texture);
 	game_assets->obstacle->instances = malloc(999
@@ -44,7 +43,6 @@ void	create_obstacle(mlx_t *mlx, GameAssets *game_assets)
 
 void	create_collectible(mlx_t *mlx, GameAssets *game_assets)
 {
-	game_assets->collectible = malloc(sizeof(mlx_image_t));
 	game_assets->texture_collectible = mlx_load_png("assets/fish.png");
 	game_assets->collectible = mlx_texture_to_image(mlx,
 			game_assets->texture_collectible);
@@ -54,7 +52,6 @@ void	create_collectible(mlx_t *mlx, GameAssets *game_assets)
 
 void	create_sortie(mlx_t *mlx, GameAssets *game_assets)
 {
-	game_assets->sortie = malloc(sizeof(mlx_image_t));
 	game_assets->texture_sortie = mlx_load_png("assets/sortie.png");
 	game_assets->sortie = mlx_texture_to_image(mlx,
 			game_assets->texture_sortie);

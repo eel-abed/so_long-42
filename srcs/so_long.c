@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/08 21:30:40 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:32:22 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void	get_window_dimensions(char *map_name,
 	calculate_width(fd, dim);
 	*width = dim->max_width * 64;
 	*height = dim->max_height * 64;
+	if ((*width > 2500) || (*height > 1000))
+	{
+		printf("Error: Map size is too big.\n");
+		close(fd);
+		ft_error();
+	}
 	close(fd);
 }
 
@@ -38,7 +44,6 @@ static void	init_game_assets(mlx_t *mlx, GameAssets *game_assets
 {
 	game_assets->total_movements = 0;
 	game_assets->collectibles_taken = 0;
-	game_assets->player = malloc(sizeof(mlx_image_t));
 	create_elements(mlx, game_assets);
 	read_map(map_name, game_assets, dim);
 	display_elements(mlx, game_assets->obstacle, game_assets->collectible);
@@ -65,5 +70,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game.mlx, ft_hook, &game.hook_param);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
+	free_elements(game.mlx, &game.game_assets);
 	return (EXIT_SUCCESS);
 }
