@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:42:11 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/05 18:21:54 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:23:54 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 int	openfile(char *map_name)
 {

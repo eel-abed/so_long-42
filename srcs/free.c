@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 22:31:09 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:54:12 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:21 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 void	free_map_data(char **map_data, int max_height)
 {

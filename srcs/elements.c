@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:44:52 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:54:08 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:30 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 void	create_elements(mlx_t *mlx, t_game_assets *game_assets)
 {

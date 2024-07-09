@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:40:33 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 15:00:28 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:11 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 static int	check_collision(unsigned int new_x, unsigned int new_y,
 				t_game_assets *game_assets)

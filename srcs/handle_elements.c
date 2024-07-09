@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 14:40:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:54:14 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:19 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 void	handle_collectible(unsigned int new_x, unsigned int new_y,
 				t_game_assets *game_assets)

@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 14:05:51 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:00 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 void	ft_error(void)
 {

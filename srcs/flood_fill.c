@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:43:29 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:54:09 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:26 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 void	fill(t_point cur, t_fill_params *params)
 {

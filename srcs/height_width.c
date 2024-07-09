@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:13:16 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:53:42 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:16 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 void	ft_map_wall_error(void)
 {

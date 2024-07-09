@@ -6,11 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 21:13:12 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/08 21:13:30 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:24:32 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "headers/so_long.h"
 
 void	display_collectibles(mlx_t *mlx, mlx_image_t *collectible)
 {
