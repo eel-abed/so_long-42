@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:40:33 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 13:56:01 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:00:28 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_hook(void *param)
 	mlx_t				*mlx;
 	t_game_assets		*game_assets;
 	unsigned int		new_x;
-	unsigned int		ew_y;
+	unsigned int		new_y;
 
 	hook_param = (t_hook_param *)param;
 	mlx = hook_param->mlx;
