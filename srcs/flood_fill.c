@@ -6,12 +6,11 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:43:29 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/02 18:17:05 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/05 19:06:30 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	fill(t_point cur, t_fill_params *params)
 {
@@ -54,6 +53,7 @@ int	flood_fill(char **tab, t_point size, t_point begin, int collectible_total)
 	fill(begin, &params);
 	return (collectible_count == collectible_total && exit_reachable);
 }
+
 void	perform_flood_fill(char **map_data, Dimensions *dim,
 	GameAssets *game_assets)
 {

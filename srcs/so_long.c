@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/05 18:22:57 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:30:40 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,24 @@ static void	init_game_assets(mlx_t *mlx, GameAssets *game_assets
 
 int	main(int argc, char **argv)
 {
-	t_hook_param	hook_param;
-	int				width;
-	int				height;
-	mlx_t			*mlx;
-	GameAssets		game_assets;
+	t_game_context	game;
 
+	game.dim = (Dimensions){0, 0, 0, -1, 0};
 	if (argc < 2)
 	{
 		printf("Usage: %s <map_name>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
-	Dimensions dim = {0, 0, 0, -1, 0};
-	get_window_dimensions(argv[1], &width, &height, &dim);
-	mlx = mlx_init(width, height, "Test", false);
-	if (!mlx)
+	get_window_dimensions(argv[1], &game.dim.max_width,
+		&game.dim.max_height, &game.dim);
+	game.mlx = mlx_init(game.dim.max_width, game.dim.max_height, "Test", false);
+	if (!game.mlx)
 		ft_error();
-	init_game_assets(mlx, &game_assets, argv[1], &dim);
-	hook_param.mlx = mlx;
-	hook_param.game_assets = &game_assets;
-	mlx_loop_hook(mlx, ft_hook, &hook_param);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	init_game_assets(game.mlx, &game.game_assets, argv[1], &game.dim);
+	game.hook_param.mlx = game.mlx;
+	game.hook_param.game_assets = &game.game_assets;
+	mlx_loop_hook(game.mlx, ft_hook, &game.hook_param);
+	mlx_loop(game.mlx);
+	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

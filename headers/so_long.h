@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:16:45 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/05 18:22:25 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/08 21:19:04 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ typedef struct s_dimensions{
     int tmp_max_height;
 } Dimensions;
 
+typedef struct s_game_context
+{
+	mlx_t*mlx;
+	GameAssets game_assets;
+	Dimensions dim;
+	t_hook_param hook_param;
+} t_game_context;
+
 void	calculate_width(int fd, Dimensions *dim);
 void	calculate_height(int fd, Dimensions *dim);
 int	flood_fill(char **tab, t_point size, t_point begin, int collectible_total);
@@ -83,4 +91,11 @@ void ft_error(void);
 void	handle_collectible(unsigned int new_x, unsigned int new_y, GameAssets *game_assets);
 void	handle_exit(unsigned int new_x, unsigned int new_y, GameAssets *game_assets, mlx_t *mlx);
 void	handle_movement(mlx_t *mlx, unsigned int *new_x, unsigned int *new_y);
+void	create_elements(mlx_t *mlx, GameAssets *game_assets);
+void	create_player(mlx_t *mlx, GameAssets *game_assets);
+void	create_obstacle(mlx_t *mlx, GameAssets *game_assets);
+void	create_collectible(mlx_t *mlx, GameAssets *game_assets);
+void	create_sortie(mlx_t *mlx, GameAssets *game_assets);
+
+
 #endif
