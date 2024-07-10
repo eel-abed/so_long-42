@@ -23,6 +23,7 @@
 		"unistd.h": "c",
 		"algorithm": "c",
 		"chrono": "c",
-		"locale": "c"
+		"locale": "c",
+		"cstring": "cpp"
 	}
 }
