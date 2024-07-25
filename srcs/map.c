@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:39:07 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 15:23:46 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:01:29 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	read_map(char *map_name, t_game_assets *game_assets, t_dimensions *dim)
 		map_data[i] = malloc(128 * sizeof(char));
 		i++;
 	}
+	if (!map_data)
+		ft_error();
 	game_assets->player->count = 0;
 	game_assets->obstacle->count = 0;
 	game_assets->collectible->count = 0;
