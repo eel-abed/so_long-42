@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   height_width.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-abed <eel-abed@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:13:16 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/09 15:24:16 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:46:43 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	calculate_height(int fd, t_dimensions *dim)
 		{
 			dim->tmp_max_height++;
 		}
+	}
+	if (dim->tmp_max_height <= 1)
+	{
+		printf("Error: Map is too small.\n");
+		ft_error();
 	}
 }
 
