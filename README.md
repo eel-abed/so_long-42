@@ -40,11 +40,14 @@ The map file should have a .ber extension and follow these rules:
 - E for the exit.
 
 Example:
+````
 111111
 1P0C01
 100001
 1C0E01
 111111
+````
+
 
 ## Code Structure
 
