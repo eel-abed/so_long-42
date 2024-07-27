@@ -1,5 +1,5 @@
 # so_long
-
+![Game Screenshot](assets/Screenshot.png)
 ## Overview
 
 so_long is a simple 2D game built using the MiniLibX library. The objective of the game is to navigate through a map, collect all collectibles, and reach the exit while avoiding obstacles.
