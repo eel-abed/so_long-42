@@ -22,14 +22,22 @@ so_long is a simple 2D game built using the MiniLibX library. The objective of t
 ### Installation
 
 1. Clone the repository:
+````
 git clone https://github.com/eel-abed/so_long.git
 cd so_long
+````
+
 2. Compile the project:
+````
 make
+````
 ## Running the Game
 
 To run the game, use the following command:
+````
 ./so_long assets/map.ber
+````
+
 ## Map File
 
 The map file should have a .ber extension and follow these rules:
