@@ -6,7 +6,7 @@
 /*   By: eel-abed <eel-abed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:19 by eel-abed          #+#    #+#             */
-/*   Updated: 2024/07/25 19:06:49 by eel-abed         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:38:37 by eel-abed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	}
 	get_window_dimensions(argv[1], &game.dim.max_width,
 		&game.dim.max_height, &game.dim);
-	game.mlx = mlx_init(game.dim.max_width, game.dim.max_height, "Test", false);
+	game.mlx = mlx_init(game.dim.max_width, game.dim.max_height, "game", false);
 	if (!game.mlx)
 		ft_error();
 	init_game_assets(game.mlx, &game.game_assets, argv[1], &game.dim);
